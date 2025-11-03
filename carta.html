@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="carta.css">
+    <title>Carta de Amor</title>
+</head>
+<body>
+    <div class="envelope-container">
+        <div class="envelope" id="envelope">
+            <!-- Corazón con iniciales como estampa (izquierda) -->
+            <div class="heart-stamp" id="heartStamp">
+                <div class="heart-shape">
+                    <span id="initialsText">A x D</span>
+                </div>
+            </div>
+            <!-- Imagen de gato como estampa (derecha) -->
+            <div class="cat-stamp">
+                <img src="cat.png" alt="Cat stamp" width="270" height="270">
+            </div>
+            <div class="envelope-flap"></div>
+            <div class="envelope-body"></div>
+        </div>
+        
+        <div id="letter" class="letter hidden">
+            <div class="letter-content">
+                <h2>Mi Querida <span id="letterName"></span></h2>
+                <p>Cada día que pasa, mi amor por ti crece como las flores más hermosas del jardín.</p>
+                <p>Quiero que sepas que siempre cuentas conmigo, que siempre estoy aqui para apoyarte y ayudarte.</p>
+                <p>Que para mi nunca serás una carga, prometo estar contigo en las buenas y en las malas.</p>
+                <p>Quiero ser ese lugar seguro para ti, aquel en el que siempre puedas encontrar consuelo, en donde alguien te escuche, te valore, te respete y te cuide como te mereces.</p>
+                <p class="signature">Con todo mi amor,<br>Tu admirador secreto no tan secreto jiji :Þ 💕</p>
+                <button id="toFlowers" class="next-btn">Ver tu sorpresa</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let userName = '';
+        let userInitial = '';
+        let partnerInitial = '';
+
+        // Función para manejar la apertura del sobre
+        function handleEnvelopeClick() {
+            const envelope = document.getElementById('envelope');
+            const letter = document.getElementById('letter');
+            const letterName = document.getElementById('letterName');
+            
+            // Abrir sobre
+            envelope.classList.add('open');
+            
+            // Mostrar carta después de un delay
+            setTimeout(() => {
+                letterName.textContent = userName || 'Mi querido/a';
+                letter.classList.remove('hidden');
+                letter.classList.add('show');
+            }, 800);
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Recuperar datos del localStorage
+            const savedName = localStorage.getItem('userName');
+            const savedUserInitial = localStorage.getItem('userInitial');
+            const savedPartnerInitial = localStorage.getItem('partnerInitial');
+            
+            if (savedName) {
+                userName = savedName;
+            }
+            
+            // Configurar las iniciales en el corazón
+            if (savedUserInitial && savedPartnerInitial) {
+                userInitial = savedUserInitial;
+                partnerInitial = savedPartnerInitial;
+                document.getElementById('initialsText').textContent = `${userInitial} x ${partnerInitial}`;
+            }
+            
+            // Event listener para el sobre
+            const envelope = document.getElementById('envelope');
+            if (envelope) {
+                envelope.addEventListener('click', handleEnvelopeClick);
+            }
+            
+            // Event listener para ir a las flores
+            const toFlowersBtn = document.getElementById('toFlowers');
+            if (toFlowersBtn) {
+                toFlowersBtn.addEventListener('click', function() {
+                    window.location.href = 'index.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

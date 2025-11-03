@@ -1,0 +1,197 @@
+/* Reset básico */
+*.welcome-container {
+.greeting {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s ease-out;
+  text-shadow: 2px 2px 4px rgba(44, 0, 0, 0.3);
+  color: #2c0000;
+}-align: center;
+  color: #2c0000;
+  max-width: 600px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 40px rgba(102, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos para la página de bienvenida */
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #ff4d4d 0%, #ff9999 30%, #ffcccc 70%, #fff0f0 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.welcome-container {
+  text-align: center;
+  color: white;
+  max-width: 600px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 40px rgba(102, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.greeting {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s ease-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.name-input-container {
+  margin-bottom: 2rem;
+}
+
+.name-input {
+  padding: 1rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 25px;
+  text-align: center;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 300px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.name-input:focus {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.submit-btn, .next-btn, .check-btn {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background: linear-gradient(45deg, #ff0000, #ff4d4d, #ff9999);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 20px rgba(179, 0, 0, 0.4);
+  margin: 0.5rem;
+}
+
+.submit-btn:hover, .next-btn:hover, .check-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(179, 0, 0, 0.6);
+  background: linear-gradient(45deg, #b30000, #ff0000, #ff4d4d);
+}
+
+.second-question {
+  margin-top: 2rem;
+  animation: fadeInUp 0.8s ease-out;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 153, 153, 0.4);
+}
+
+.love-question {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: #2c0000;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.love-input {
+  padding: 1rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 25px;
+  text-align: center;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 300px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.love-input:focus {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 77, 77, 0.8);
+}
+
+.check-btn {
+  background: linear-gradient(45deg, #660000, #b30000, #ff0000);
+}
+
+.personal-message {
+  margin-top: 2rem;
+  animation: fadeInUp 0.8s ease-out;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.personal-message p {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  color: #2c0000;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efectos de partículas en el fondo */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 153, 153, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 77, 77, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

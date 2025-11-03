@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bienvenida.css">
+    <title>Bienvenida - Carta de Amor</title>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1 class="greeting">❤️ Holi amor ❤️</h1>
+        <div class="name-input-container">
+            <input type="text" id="nameInput" placeholder="¿Me confirmas quien eres ;)?" class="name-input">
+            <button id="nameSubmit" class="submit-btn">Continuar</button>
+        </div>
+        <div id="personalMessage" class="personal-message hidden">
+            <p id="messageText"></p>
+            <div id="secondQuestion" class="second-question hidden">
+                <p class="love-question">¿Sabes quién es la persona que más te ama en este mundo? 💕</p>
+                <input type="text" id="loveAnswer" placeholder="Escribe tu respuesta..." class="love-input">
+                <button id="checkAnswer" class="check-btn">Verificar</button>
+            </div>
+            <button id="toPage2" class="next-btn hidden">Siguiente</button>
+        </div>
+    </div>
+
+    <script>
+        let userName = '';
+        let partnerName = '';
+
+        // Función para manejar el envío del nombre
+        function handleNameSubmit() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value.trim();
+            
+            if (name) {
+                userName = name;
+                localStorage.setItem('userName', name);
+                
+                // Mostrar mensaje personalizado
+                const messageContainer = document.getElementById('personalMessage');
+                const messageText = document.getElementById('messageText');
+                
+                messageText.innerHTML = `Sabes algo, ${name}?<br><br>Tengo una pregunta muy especial para ti...`;
+                
+                // Ocultar input y mostrar mensaje
+                document.querySelector('.name-input-container').style.display = 'none';
+                messageContainer.classList.remove('hidden');
+                
+                // Mostrar segunda pregunta después de un delay
+                setTimeout(() => {
+                    document.getElementById('secondQuestion').classList.remove('hidden');
+                }, 1500);
+            }
+        }
+
+        // Función para verificar la respuesta de amor
+        function handleLoveAnswer() {
+            const loveAnswer = document.getElementById('loveAnswer');
+            const answer = loveAnswer.value.trim().toLowerCase();
+            
+            // Lista de respuestas correctas (cualquier variación)
+            const correctAnswers = [
+                'Dorian', 'dorian', 'mi dorian', 'mi amor', 
+                'mi novio', 'mi esposo', 'mi esposito',
+            ];
+            
+            // Verificar si la respuesta está en la lista de correctas
+            const isCorrect = correctAnswers.some(correct => 
+                answer.includes(correct) || correct.includes(answer)
+            );
+            
+            if (isCorrect) {
+                partnerName = loveAnswer.value.trim();
+                localStorage.setItem('partnerName', partnerName);
+                
+                // Guardar las iniciales
+                const userInitial = userName.charAt(0).toUpperCase();
+                const partnerInitial = partnerName.charAt(0).toUpperCase();
+                localStorage.setItem('userInitial', userInitial);
+                localStorage.setItem('partnerInitial', partnerInitial);
+                
+                // Mostrar mensaje de éxito y botón siguiente
+                const messageText = document.getElementById('messageText');
+                messageText.innerHTML = `Asi es mi amorcito, ${userName} 💕<br><br>Ahora tienes algo muy especial esperándote...`;
+                
+                document.getElementById('secondQuestion').style.display = 'none';
+                document.getElementById('toPage2').classList.remove('hidden');
+            } else {
+                // Mensaje de motivación si no es la respuesta correcta
+                const messageText = document.getElementById('messageText');
+                messageText.innerHTML = `Mmm... ${userName}, piénsalo un poco más 🤔<br><br>¿Quién está aquí contigo creando esta experiencia especial?`;
+                loveAnswer.value = '';
+                loveAnswer.focus();
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Event listener para el botón de envío del nombre
+            const nameSubmit = document.getElementById('nameSubmit');
+            if (nameSubmit) {
+                nameSubmit.addEventListener('click', handleNameSubmit);
+            }
+            
+            // Event listener para presionar Enter en el input del nombre
+            const nameInput = document.getElementById('nameInput');
+            if (nameInput) {
+                nameInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleNameSubmit();
+                    }
+                });
+            }
+            
+            // Event listener para verificar respuesta de amor
+            const checkAnswer = document.getElementById('checkAnswer');
+            if (checkAnswer) {
+                checkAnswer.addEventListener('click', handleLoveAnswer);
+            }
+            
+            // Event listener para presionar Enter en el input de amor
+            const loveAnswer = document.getElementById('loveAnswer');
+            if (loveAnswer) {
+                loveAnswer.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleLoveAnswer();
+                    }
+                });
+            }
+            
+            // Event listener para ir a la página de carta
+            const toPage2Btn = document.getElementById('toPage2');
+            if (toPage2Btn) {
+                toPage2Btn.addEventListener('click', function() {
+                    window.location.href = 'carta.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

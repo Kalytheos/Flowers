@@ -1,0 +1,317 @@
+/* Reset básico */
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos para la página de la carta */
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #ff9999 0%, #ffcccc 30%, #fff0f0 70%, #ffffff 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.envelope-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  perspective: 1000px;
+}
+
+.envelope {
+  position: relative;
+  top:100px;
+  width: 450px;
+  height: 350px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.envelope:hover {
+  transform: scale(1.05);
+}
+
+.envelope-body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #fff8e1, #f5f5f5);
+  border: 3px solid #ddd;
+  border-radius: 15px;
+  box-shadow: 
+    0 20px 40px rgba(0,0,0,0.2),
+    inset 0 0 20px rgba(255,255,255,0.9);
+  position: relative;
+}
+
+.envelope-body::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: 65%;
+  background: linear-gradient(135deg, #660000, #b30000, #ff0000, #ff4d4d);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-radius: 15px 15px 0 0;
+  transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transform-origin: top center;
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(102, 0, 0, 0.4);
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  animation: flap-open 0.8s ease-out;
+}
+
+.cat-stamp {
+  position: absolute;
+  top: -300px;
+  right: 75px;
+  z-index: 20;
+  background: white;
+  padding: 8px;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(102, 0, 0, 0.4);
+  border: 3px solid #ff0000;
+}
+
+.cat-stamp img {
+  border-radius: 50%;
+  display: block;
+}
+
+.heart-stamp {
+  position: absolute;
+  top: 15px;
+  left: 25px;
+  z-index: 20;
+}
+
+.heart-shape {
+  position: relative;
+  top:160px;
+  right:-170px;
+  width: 70px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.heart-shape:before,
+.heart-shape:after {
+  content: '';
+  width: 35px;
+  height: 50px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg);
+  background: linear-gradient(135deg, #ff0000, #b30000, #660000);
+  border-radius: 50px 50px 0 0;
+  box-shadow: 0 5px 15px rgba(102, 0, 0, 0.6);
+}
+
+.heart-shape:after {
+  left: 22px;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.heart-shape span {
+  position: relative;
+  z-index: 10;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  letter-spacing: 1px;
+}
+
+.heart-shape:hover {
+  transform: scale(1.1);
+}
+
+.letter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  min-height: 550px;
+  background: linear-gradient(135deg, #fdfcf0, #f8f8f8);
+  border: 2px solid #e6e6e6;
+  border-radius: 15px;
+  box-shadow: 
+    0 30px 60px rgba(0,0,0,0.4),
+    inset 0 0 30px rgba(255,255,255,0.9);
+  z-index: 100;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5) rotateY(10deg);
+  transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.letter.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1) rotateY(0deg);
+  animation: letter-appear 0.8s ease-out;
+}
+
+.letter-content {
+  padding: 3rem;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  line-height: 1.8;
+  color: #2c0000;
+  position: relative;
+}
+
+.letter-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 60px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #ff0000, transparent);
+}
+
+.letter-content h2 {
+  color: #b30000;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  text-shadow: 1px 1px 2px rgba(102, 0, 0, 0.3);
+  font-weight: normal;
+}
+
+.letter-content p {
+  margin-bottom: 1.8rem;
+  font-size: 1.2rem;
+  text-align: justify;
+  margin-left: 20px;
+}
+
+.signature {
+  text-align: right;
+  font-style: italic;
+  margin-top: 2.5rem !important;
+  margin-right: 20px;
+  color: #2c0000;
+  font-size: 1.1rem !important;
+}
+
+.next-btn {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background: linear-gradient(45deg, #660000, #b30000, #ff0000);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 20px rgba(102, 0, 0, 0.4);
+}
+
+.next-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(102, 0, 0, 0.6);
+  background: linear-gradient(45deg, #b30000, #ff0000, #ff4d4d);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Animaciones */
+@keyframes flap-open {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(-10deg);
+  }
+  100% {
+    transform: rotateX(180deg);
+  }
+}
+
+@keyframes letter-appear {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5) rotateY(10deg) translateY(100px);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.05) rotateY(-2deg) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotateY(0deg) translateY(0px);
+  }
+}
+
+/* Efectos de fondo */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255, 153, 153, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(255, 77, 77, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(179, 0, 0, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  animation: gentle-float 8s ease-in-out infinite;
+}
+
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+}
